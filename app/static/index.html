@@ -1,0 +1,70 @@
+<!-- app/static/index.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FastAPI ChatGPT ChatBot</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <main class="page">
+        <section class="hero">
+            <h1>FastAPI ChatGPT 챗봇 앱</h1>
+            <p>오른쪽 아래 챗봇 버튼을 눌러 질문을 입력하세요.</p>
+            <p class="notice">API 키가 없으면 데모 모드로 동작하고, API 키를 설정하면 실제 ChatGPT 응답을 받습니다.</p>
+        </section>
+    </main>
+
+    <button id="chatIcon" class="chat-icon" type="button" aria-label="챗봇 열기">💬</button>
+
+    <section id="chatModal" class="chat-modal hidden" aria-label="챗봇 대화창">
+        <header class="chat-header">
+            <strong>ChatGPT ChatBot</strong>
+            <div class="header-buttons">
+                <!-- 설정 버튼 추가 -->
+                <button id="settingsToggle" class="settings-toggle-button" type="button" aria-label="설정 열기">⚙️</button>
+                <button id="closeChat" class="close-button" type="button" aria-label="챗봇 닫기">×</button>
+            </div>
+        </header>
+
+        <!-- 설정 패널 (기본 숨김) -->
+        <div id="settingsPanel" class="settings-panel hidden">
+            <div class="settings-row">
+                <label for="systemInstruction">System Instruction</label>
+                <textarea id="systemInstruction" class="settings-textarea" rows="3">너는 한국어로 친절하고 정확하게 답변하는 FastAPI 기반 ChatGPT 챗봇이다.</textarea>
+            </div>
+            <div class="settings-row">
+                <label for="modelSelect">Model</label>
+                <select id="modelSelect" class="settings-select">
+                    <option value="gpt-4o-mini" selected>gpt-4o-mini</option>
+                    <option value="gpt-4o">gpt-4o</option>
+                    <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+                </select>
+            </div>
+            <div class="settings-row">
+                <label for="temperature">Temperature <span id="temperatureValue">0.7</span></label>
+                <input id="temperature" class="settings-range" type="range" min="0" max="2" step="0.1" value="0.7" />
+            </div>
+            <div class="settings-row">
+                <label for="topP">Top P <span id="topPValue">1.0</span></label>
+                <input id="topP" class="settings-range" type="range" min="0" max="1" step="0.1" value="1.0" />
+            </div>
+            <div class="settings-row">
+                <label for="maxTokens">Max Tokens <span id="maxTokensValue">1024</span></label>
+                <input id="maxTokens" class="settings-range" type="range" min="64" max="4096" step="64" value="1024" />
+            </div>
+            <button id="applySettings" class="apply-button" type="button">적용</button>
+        </div>
+
+        <div id="chatMessages" class="chat-messages"></div>
+
+        <form id="chatForm" class="chat-form">
+            <input id="messageInput" class="chat-input" type="text" placeholder="질문을 입력하세요." autocomplete="off" />
+            <button class="send-button" type="submit">전송</button>
+        </form>
+    </section>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
